@@ -2,9 +2,6 @@
 
 A collection of Linux administration scripts built as part of my learning journey
 
-## Scripts
-
-
 ---
  
 ## Scripts
