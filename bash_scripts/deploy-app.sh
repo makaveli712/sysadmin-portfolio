@@ -1,4 +1,4 @@
-$!/bin/bash
+#!/bin/bash
 
 #Demonistration of simple git pull + restart
 cd /opt/example_app || exit

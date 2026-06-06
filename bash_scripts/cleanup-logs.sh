@@ -1,4 +1,4 @@
-$!/bin/bash
+#!/bin/bash
 
 #Demonistration
 find /var/log/example_app -name "*.log" -mtime +2 -exec gzip {} \;
