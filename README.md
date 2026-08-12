@@ -39,4 +39,5 @@ Reports disk usage, memory, and CPU load. Sends an email alert to the admin if t
 ### `wrapper.sh`
 Orchestration script with locking and logging. Prevents concurrent runs via a lock file, registers a cleanup trap on exit, and logs start and finish timestamps to a log file.
  
+.
 ---
