@@ -1,17 +1,32 @@
 ---
-- hosts: ned3@192.168.1.15
-  vars:
-    ansible_become_exe: /usr/bin/sudo.ws
-  become: true
-  
+- hosts: all
   tasks:
-    - name: install apache2 package
-      apt:
+    - name: Install apache2 package
+      ansible.builtin.apt:
         name: apache2
-        state: latest
-        update_cache: yes # Best practice for apt module
+        state: present
+        update_cache: true # Best practice for apt module
+      when: ansible_distribution == "Ubuntu"
+      become: true
+      vars:
+        ansible_become_exe: /usr/bin/sudo.ws
 
-    - name: add php support for apache
-      apt:
+
+    - name: Add php support for apache
+      ansible.builtin.apt:
         name: libapache2-mod-php
-        state: latest
+        state: present
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Install apache2 package
+      ansible.builtin.dnf:
+        name: apache2
+        state: present
+        update_cache: true # Best practice for apt module
+      when: ansible_distribution == "RedHat"
+
+    - name: Add php support for apache
+      ansible.builtin.dnf:
+        name: libapache2-mod-php
+        state: present
+      when: ansible_distribution == "RedHat"
