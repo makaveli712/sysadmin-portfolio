@@ -1,0 +1,23 @@
+---
+- hosts: rhel
+  become: true
+  tasks:
+
+    - name: Install updates ( RHEL )
+      ansible.builtin.dnf:
+        name: "*"
+        state: latest
+        update_cache: true
+
+
+- hosts: ubuntu
+  become: true
+  vars:
+    ansible_become_exe: /usr/bin/sudo.ws
+  tasks:
+  
+    - name: Update ubuntu-server(s)
+      ansible.builtin.apt:
+        name: "*"
+        state: latest
+        update_cache: true
