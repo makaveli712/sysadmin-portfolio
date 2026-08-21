@@ -1,0 +1,30 @@
+- name: Provision users and groups
+  hosts: all
+  become: true
+  vars:
+    groups:
+      - developers
+      - admins
+
+    users:
+      - username: user1
+        group: developers
+      - username: user2
+        group: admins
+
+  tasks:
+    - name: Create groups
+      ansible.builtin.group:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ groups }}"
+
+    - name: Create users
+      ansible.builtin.user:
+        name: "{{ item.username }}"
+        group: "{{ item.group }}"
+        shell: /bin/bash
+        create_home: true
+        state: present
+      loop: "{{ users }}" 
+      
